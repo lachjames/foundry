@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 170" width="800" height="170" role="img" aria-labelledby="t">
+  <title id="t">Markdown in content/ is read by build/build.ts, which writes dist/, which GitHub Actions deploys to GitHub Pages.</title>
+  <style>
+    text { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 14px; fill: #1b1b1f; }
+    .mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 12px; fill: #5f6368; }
+    .box { fill: #f4f3f0; stroke: #c9c6bf; stroke-width: 1.2; }
+    .accent { fill: #f6e6dd; stroke: #b4532a; }
+    .arrow { stroke: #8a8d93; stroke-width: 1.6; fill: none; marker-end: url(#head); }
+    .headfill { fill: #8a8d93; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e6e4df; }
+      .mono { fill: #9a9890; }
+      .box { fill: #1b1b1f; stroke: #3a3a40; }
+      .accent { fill: #2e2019; stroke: #e8875a; }
+      .arrow { stroke: #6f6e69; }
+      .headfill { fill: #6f6e69; }
+    }
+  </style>
+  <defs>
+    <marker id="head" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 z" class="headfill"/>
+    </marker>
+  </defs>
+
+  <g>
+    <rect class="box" x="20" y="40" width="170" height="90" rx="8"/>
+    <text x="105" y="70" text-anchor="middle" font-weight="600">Markdown</text>
+    <text class="mono" x="105" y="92" text-anchor="middle">content/posts/*/</text>
+    <text class="mono" x="105" y="110" text-anchor="middle">index.md + assets</text>
+  </g>
+
+  <path class="arrow" d="M192,85 L216,85"/>
+
+  <g>
+    <rect class="box accent" x="220" y="40" width="170" height="90" rx="8"/>
+    <text x="305" y="70" text-anchor="middle" font-weight="600">Build</text>
+    <text class="mono" x="305" y="92" text-anchor="middle">node build/build.ts</text>
+    <text class="mono" x="305" y="110" text-anchor="middle" textLength="150" lengthAdjust="spacingAndGlyphs">markdown-it · shiki · katex</text>
+  </g>
+
+  <path class="arrow" d="M392,85 L416,85"/>
+
+  <g>
+    <rect class="box" x="420" y="40" width="170" height="90" rx="8"/>
+    <text x="505" y="70" text-anchor="middle" font-weight="600">Static site</text>
+    <text class="mono" x="505" y="92" text-anchor="middle">dist/</text>
+    <text class="mono" x="505" y="110" text-anchor="middle">html · css · feed.xml</text>
+  </g>
+
+  <path class="arrow" d="M592,85 L616,85"/>
+
+  <g>
+    <rect class="box" x="620" y="40" width="160" height="90" rx="8"/>
+    <text x="700" y="70" text-anchor="middle" font-weight="600">GitHub Pages</text>
+    <text class="mono" x="700" y="92" text-anchor="middle">foundry.sodalabs.io</text>
+    <text class="mono" x="700" y="110" text-anchor="middle">via Actions on push</text>
+  </g>
+</svg>

@@ -1,0 +1,31 @@
+{
+  "name": "foundry",
+  "private": true,
+  "version": "0.1.0",
+  "description": "foundry.sodalabs.io — engineering and research write-ups",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "build": "node build/build.ts",
+    "dev": "node build/dev.ts",
+    "new": "node build/new.ts",
+    "check": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@vscode/markdown-it-katex": "^1.1.1",
+    "gray-matter": "^4.0.3",
+    "katex": "^0.16.22",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-footnote": "^4.0.0",
+    "shiki": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.8.0"
+  }
+}

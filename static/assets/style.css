@@ -1,0 +1,717 @@
+/* ------------------------------------------------------------------
+   Foundry — theme follows the OS (prefers-color-scheme). No toggle, no JS.
+   ------------------------------------------------------------------ */
+
+:root {
+  color-scheme: light dark;
+
+  --bg: #fdfdfc;
+  --bg-raised: #f4f3f0;
+  --fg: #1b1b1f;
+  --fg-muted: #5f6368;
+  --fg-faint: #8a8d93;
+  --border: #e3e1dc;
+  --accent: #b4532a;
+  --accent-soft: #f6e6dd;
+  --link: #9a4321;
+  --code-bg: #f4f3f0;
+  --code-fg: #24292e;
+  --selection: #f3d9c9;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", "Cascadia Code", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  --measure: 44rem;
+  --gutter: clamp(1rem, 4vw, 2rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121214;
+    --bg-raised: #1b1b1f;
+    --fg: #e6e4df;
+    --fg-muted: #9a9890;
+    --fg-faint: #6f6e69;
+    --border: #2a2a2e;
+    --accent: #e8875a;
+    --accent-soft: #2e2019;
+    --link: #f09a6e;
+    --code-bg: #1b1b1f;
+    --code-fg: #e1e4e8;
+    --selection: #4a2c1c;
+    --shadow: none;
+  }
+}
+
+/* ---- base ---------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 106.25%; /* 17px */
+  line-height: 1.65;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  /* Always reserve space for the vertical scrollbar. Without this, short pages
+     (no scrollbar) and long pages (scrollbar) have different viewport widths,
+     so the centred column jumps sideways when navigating between them. */
+  scrollbar-gutter: stable;
+}
+
+@supports not (scrollbar-gutter: stable) {
+  html {
+    overflow-y: scroll;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+::selection {
+  background: var(--selection);
+}
+
+a {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+  text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent);
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0.5rem;
+  background: var(--bg-raised);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+}
+
+.skip-link:focus {
+  left: 0.5rem;
+  z-index: 10;
+}
+
+/* ---- header / footer ------------------------------------------------ */
+
+.site-header,
+.site-footer,
+main {
+  width: min(100% - 2 * var(--gutter), var(--measure));
+  margin-inline: auto;
+}
+
+.site-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.5rem 2.5rem;
+}
+
+.site-name {
+  font-weight: 650;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.site-mark {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 2px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  display: inline-block;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.1rem;
+  font-size: 0.95rem;
+}
+
+.site-nav a {
+  color: var(--fg-muted);
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--fg);
+}
+
+main {
+  flex: 1;
+}
+
+.site-footer {
+  padding-block: 3rem 2rem;
+  color: var(--fg-muted);
+  font-size: 0.875rem;
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
+}
+
+.site-footer a {
+  color: inherit;
+}
+
+/* ---- index ----------------------------------------------------------- */
+
+.intro {
+  margin-bottom: 2.5rem;
+}
+
+.intro h1 {
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.6rem;
+}
+
+.intro p {
+  color: var(--fg-muted);
+  margin: 0;
+  max-width: 38rem;
+}
+
+.year-group {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 0 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.year {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--fg-faint);
+  margin: 0.3rem 0 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-item {
+  padding-block: 0.25rem 1.5rem;
+}
+
+.post-item-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.post-item-title:hover {
+  color: var(--link);
+}
+
+.post-item-summary {
+  margin: 0.3rem 0 0.45rem;
+  color: var(--fg-muted);
+}
+
+.post-item-meta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--fg-faint);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.9rem;
+  align-items: center;
+}
+
+@media (max-width: 40rem) {
+  .year-group {
+    grid-template-columns: 1fr;
+  }
+  .year {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.empty {
+  color: var(--fg-muted);
+}
+
+/* ---- tags & badges --------------------------------------------------- */
+
+.tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  font-size: 0.78rem;
+  line-height: 1;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.tag:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.tag-large {
+  font-size: 0.95rem;
+  padding: 0.45rem 0.8rem;
+}
+
+.tag-cloud {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.tag-cloud li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.tag-count {
+  font-size: 0.8rem;
+  color: var(--fg-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.badge {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* ---- post ------------------------------------------------------------- */
+
+.post-header {
+  margin-bottom: 2rem;
+}
+
+.post-header h1 {
+  font-size: clamp(1.75rem, 5vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.75rem;
+}
+
+.post-meta {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: var(--fg-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.meta-sep {
+  color: var(--fg-faint);
+}
+
+.post-summary {
+  font-size: 1.1rem;
+  color: var(--fg-muted);
+  margin: 0 0 1rem;
+}
+
+.post-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+
+/* ---- table of contents ----------------------------------------------- */
+
+.toc {
+  margin: 0 0 2rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.92rem;
+}
+
+.toc summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.toc ol {
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+}
+
+.toc li {
+  margin: 0.25rem 0;
+}
+
+.toc .toc-l3 {
+  padding-left: 1.1rem;
+  font-size: 0.88rem;
+}
+
+.toc a {
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.toc a:hover {
+  color: var(--link);
+}
+
+/* ---- prose ------------------------------------------------------------- */
+
+.prose > * + * {
+  margin-block-start: 1.1em;
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  margin-block-start: 2.2em;
+  margin-block-end: 0.6em;
+  scroll-margin-top: 1.5rem;
+}
+
+.prose h2 {
+  font-size: 1.5rem;
+}
+
+.prose h3 {
+  font-size: 1.2rem;
+}
+
+.prose h4 {
+  font-size: 1.02rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+}
+
+.heading-anchor {
+  margin-left: 0.35em;
+  color: var(--fg-faint);
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 120ms;
+}
+
+.prose h2:hover .heading-anchor,
+.prose h3:hover .heading-anchor,
+.prose h4:hover .heading-anchor,
+.heading-anchor:focus {
+  opacity: 1;
+}
+
+.prose p {
+  margin-block: 0;
+}
+
+.prose p + p {
+  margin-block-start: 1.1em;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+}
+
+.prose li + li {
+  margin-top: 0.3em;
+}
+
+.prose hr {
+  border: 0;
+  height: 1px;
+  background: var(--border);
+  margin-block: 2.5rem;
+}
+
+.prose blockquote {
+  margin-inline: 0;
+  padding: 0.25rem 0 0.25rem 1.1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--fg-muted);
+}
+
+.prose blockquote p {
+  margin: 0;
+}
+
+.prose strong {
+  font-weight: 650;
+}
+
+.prose img,
+.prose video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.prose figure {
+  margin-inline: 0;
+  text-align: center;
+}
+
+.prose figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+  text-align: center;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  display: block;
+  overflow-x: auto;
+}
+
+.prose th,
+.prose td {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.prose th {
+  font-weight: 600;
+  color: var(--fg-muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.prose kbd {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 0.1em 0.4em;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--bg-raised);
+}
+
+/* ---- inline & block code ------------------------------------------------ */
+
+code,
+pre,
+kbd,
+samp {
+  font-family: var(--font-mono);
+  font-feature-settings: "liga" 0;
+}
+
+.prose :not(pre) > code {
+  font-size: 0.86em;
+  padding: 0.12em 0.35em;
+  border-radius: 4px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  overflow-wrap: anywhere;
+}
+
+.codeblock {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--code-bg);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.codeblock-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  padding: 0.45rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--code-bg) 70%, var(--bg));
+}
+
+.codeblock[data-lang]::after {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0.45rem;
+  right: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  pointer-events: none;
+}
+
+.codeblock-label + pre {
+  padding-top: 0.9rem;
+}
+
+.codeblock pre {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  tab-size: 2;
+  background: transparent !important; /* shiki sets an inline background; the theme owns it */
+}
+
+.codeblock pre code {
+  display: block;
+  min-width: max-content;
+}
+
+/* shiki dual themes: colours are emitted as CSS variables on each span. */
+.shiki,
+.shiki span {
+  color: var(--shiki-light, var(--code-fg));
+  font-style: var(--shiki-light-font-style, inherit);
+  font-weight: var(--shiki-light-font-weight, inherit);
+  text-decoration: var(--shiki-light-text-decoration, inherit);
+}
+
+@media (prefers-color-scheme: dark) {
+  .shiki,
+  .shiki span {
+    color: var(--shiki-dark, var(--code-fg));
+    font-style: var(--shiki-dark-font-style, inherit);
+    font-weight: var(--shiki-dark-font-weight, inherit);
+    text-decoration: var(--shiki-dark-text-decoration, inherit);
+  }
+}
+
+/* Plain-text fences (no language) */
+.codeblock pre:not(.shiki) {
+  color: var(--code-fg);
+}
+
+/* ---- maths -------------------------------------------------------------- */
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 0.25rem;
+}
+
+.katex {
+  font-size: 1.05em;
+}
+
+/* ---- footnotes ------------------------------------------------------------ */
+
+.footnotes {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: var(--fg-muted);
+}
+
+.footnotes-sep {
+  margin-block: 2rem 1rem;
+}
+
+.footnotes ol {
+  padding-left: 1.25rem;
+}
+
+.footnote-ref a,
+.footnote-backref {
+  text-decoration: none;
+}
+
+.footnote-ref a {
+  padding: 0 0.15em;
+}
+
+/* ---- embedded demos -------------------------------------------------------- */
+
+.demo {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-raised);
+  color-scheme: light dark;
+}
+
+/* ---- print ----------------------------------------------------------------- */
+
+@media print {
+  .site-nav,
+  .site-footer,
+  .toc,
+  .post-footer,
+  .heading-anchor {
+    display: none;
+  }
+  .codeblock pre {
+    white-space: pre-wrap;
+  }
+}

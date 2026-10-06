@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .m { fill: #b4532a; }
+    @media (prefers-color-scheme: dark) { .m { fill: #e8875a; } }
+  </style>
+  <rect class="m" x="8" y="8" width="16" height="16" rx="2" transform="rotate(45 16 16)"/>
+</svg>
