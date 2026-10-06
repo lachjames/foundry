@@ -21,6 +21,12 @@ export const site = {
     url: 'https://github.com/lachjames',
   },
 
+  /** Shown in the footer copyright line. */
+  copyright: {
+    holder: 'SoDa Labs',
+    url: 'https://sodalabs.io' as string | null,
+  },
+
   /** Source repository, shown in the footer when set. */
   repo: 'https://github.com/lachjames/foundry' as string | null,
 

@@ -57,6 +57,9 @@ export function layout(o: LayoutOptions): string {
   const canonical = absoluteUrl(o.path);
   const image = o.image ? absoluteUrl(o.image) : null;
   const repoLink = site.repo ? ` · <a href="${escapeHtml(site.repo)}" rel="noopener">Source</a>` : '';
+  const holder = site.copyright.url
+    ? `<a href="${escapeHtml(site.copyright.url)}" rel="noopener">${escapeHtml(site.copyright.holder)}</a>`
+    : escapeHtml(site.copyright.holder);
 
   return `<!doctype html>
 <html lang="${escapeHtml(site.language)}">
@@ -95,7 +98,7 @@ ${o.jsonLd ? `  <script type="application/ld+json">${JSON.stringify(o.jsonLd)}</
 ${o.body}
   </main>
   <footer class="site-footer">
-    <p>&copy; ${new Date().getUTCFullYear()} <a href="${escapeHtml(site.author.url)}" rel="noopener">${escapeHtml(site.author.name)}</a>${repoLink} · <a href="/feed.xml">RSS</a></p>
+    <p>&copy; ${new Date().getUTCFullYear()} ${holder}${repoLink} · <a href="/feed.xml">RSS</a></p>
   </footer>
 </body>
 </html>
